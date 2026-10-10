@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowBillingVendorAssumeWithExternalId",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::111122223333:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "aws:PrincipalArn": "arn:aws:iam::111122223333:user/billing-vendor-svc",
+                    "sts:ExternalId": "EXAMPLE-EXTERNAL-ID"
+                }
+            }
+        }
+    ]
+}

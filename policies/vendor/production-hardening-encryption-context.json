@@ -1,0 +1,17 @@
+{
+    "_comment": "NOT DEPLOYED. The production fix for the gap we flagged: the KMS grant is bound to the billing/ prefix, so the boundary survives an S3 policy mistake.",
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DecryptBillingObjectsOnly",
+            "Effect": "Allow",
+            "Action": "kms:Decrypt",
+            "Resource": "arn:aws:kms:us-east-1:111122223333:key/EXAMPLE-KEY-ID",
+            "Condition": {
+                "StringLike": {
+                    "kms:EncryptionContext:aws:s3:arn": "arn:aws:s3:::riverbend-charts-111122223333/billing/*"
+                }
+            }
+        }
+    ]
+}
